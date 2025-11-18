@@ -1,3 +1,4 @@
+```bash
 good_hamburger/
 ├── assets/
 │ ├── audio/
@@ -14,22 +15,22 @@ good_hamburger/
 │ │
 │ ├── shared/ # Lógica e UI Compartilhada
 │ │ ├── domain/ # Regras de negócio
-│ │ │ └── order_calculator.dart
+│ │ │   └── order_calculator.dart
 │ │ │
 │ │ ├── models/ # Models GLOBAIS
-│ │ │ ├── sandwich_model.dart
-│ │ │ ├── extra_model.dart
-│ │ │ ├── cart_item_model.dart
-│ │ │ ├── order_model.dart
-│ │ │ └── user_model.dart
+│ │ │   ├── sandwich_model.dart
+│ │ │   ├── extra_model.dart
+│ │ │   ├── cart_item_model.dart
+│ │ │   ├── order_model.dart
+│ │ │   └── user_model.dart
 │ │ │
 │ │ ├── providers/ # ViewModels GLOBAIS (Estado Global)
-│ │ │ ├── cart_provider.dart # (Controla o estado do carrinho)
-│ │ │ └── user_provider.dart # (Armazena o nome do usuário)
+│ │ │   ├── cart_provider.dart # (Controla o estado do carrinho)
+│ │ │   └── user_provider.dart # (Armazena o nome do usuário)
 │ │ │
 │ │ ├── repositories/ # Lógica de Dados
-│ │ │ ├── menu_repository.dart
-│ │ │ └── orders_repository.dart
+│ │ │   ├── menu_repository.dart
+│ │ │   └── orders_repository.dart
 │ │ │
 │ │ ├── services/ # Chamada a API/Arquivo Local
 │ │ │ ├── menu_service.dart # (Simula busca no JSON do menu)
@@ -102,3 +103,4 @@ good_hamburger/
 │ └── app_flow_test.dart
 │
 └── ...
+```
