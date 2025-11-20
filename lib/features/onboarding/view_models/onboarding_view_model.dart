@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_hamburger/core/router/app_router.dart';
 
 import '../repositories/onboarding_repository.dart';
 
@@ -28,6 +29,6 @@ class OnboardingViewModel extends ChangeNotifier {
     await _onboardingRepository.markOnboardingAsComplete();
 
     if (!context.mounted) return;
-    Navigator.pushReplacementNamed(context, '/menu');
+    Navigator.pushReplacementNamed(context, AppRouter.userIdentification);
   }
 }
