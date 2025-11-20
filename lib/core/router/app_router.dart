@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../features/onboarding/view/onboarding_view.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
+import '../../features/user/view/user_identification_view.dart';
+import '../../features/user/view_models/user_identification_view_model.dart';
 import '../di/injection_container.dart';
 
 class AppRouter {
@@ -25,7 +27,10 @@ class AppRouter {
       child: const OnboardingView(),
     ),
 
-    // userIdentification: (context) => const UserIdentificationView(),
+    userIdentification: (context) => ChangeNotifierProvider(
+      create: (_) => getIt<UserIdentificationViewModel>(),
+      child: const UserIdentificationView(),
+    ),
 
     // menu: (context) => ChangeNotifierProvider(
     //   create: (_) => getIt<MenuViewModel>(),

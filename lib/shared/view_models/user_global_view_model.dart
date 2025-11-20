@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 
+import '../../features/user/repositories/user_repository.dart';
+import '../models/user_model.dart';
+
 class UserGlobalViewModel extends ChangeNotifier {
-  String? _userName;
+  final UserRepository _userRepository;
 
-  String? get userName => _userName;
+  UserGlobalViewModel(this._userRepository);
 
-  bool get isUserIdentified => _userName != null && _userName!.isNotEmpty;
+  UserModel? _user;
 
-  void setUser(String name) {
-    _userName = name;
+  UserModel? get user => _user;
+
+  bool get isUserIdentified => _user?.name.isNotEmpty ?? false;
+
+  Future<void> setUserName(String name) async {
+    _user = UserModel(name: name);
+    notifyListeners();
+    await _userRepository.saveUserName(name);
+  }
+
+  Future<void> loadUserName() async {
+    final userNameSaved = await _userRepository.getUserName();
+    
+    if (userNameSaved == null) return;
+    _user = UserModel(name: userNameSaved);
     notifyListeners();
   }
 }
