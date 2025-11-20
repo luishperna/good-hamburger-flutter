@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
 import '../../features/onboarding/views/onboarding_view.dart';
+import '../../features/splash/view_models/splash_view_model.dart';
+import '../../features/splash/views/splash_view.dart';
 import '../../features/user/view_models/user_identification_view_model.dart';
 import '../../features/user/views/user_identification_view.dart';
 import '../di/injection_container.dart';
@@ -18,10 +20,11 @@ class AppRouter {
   static const String orders = '/orders';
 
   static Map<String, WidgetBuilder> get routes => {
-    // splash: (context) => ChangeNotifierProvider(
-    //   create: (_) => getIt<SplashViewModel>(),
-    //   child: const SplashView(),
-    // ),
+    splash: (context) => ChangeNotifierProvider(
+      create: (_) => getIt<SplashViewModel>(),
+      child: const SplashView(),
+    ),
+
     onboarding: (context) => ChangeNotifierProvider(
       create: (_) => getIt<OnboardingViewModel>(),
       child: const OnboardingView(),

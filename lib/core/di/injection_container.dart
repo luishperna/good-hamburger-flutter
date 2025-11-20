@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../features/onboarding/repositories/onboarding_repository.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
+import '../../features/splash/view_models/splash_view_model.dart';
 import '../../features/user/repositories/user_repository.dart';
 import '../../features/user/view_models/user_identification_view_model.dart';
 import '../../shared/services/local_preferences_service.dart';
@@ -14,6 +15,8 @@ void setupDependencies() {
   getIt.registerLazySingleton<LocalPreferencesService>(
     () => LocalPreferencesService(),
   );
+
+  getIt.registerFactory<SplashViewModel>(() => SplashViewModel());
 
   getIt.registerFactory<OnboardingRepository>(
     () => OnboardingRepository(getIt<LocalPreferencesService>()),
