@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../features/onboarding/view/onboarding_view.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
-import '../../features/user/view/user_identification_view.dart';
+import '../../features/onboarding/views/onboarding_view.dart';
 import '../../features/user/view_models/user_identification_view_model.dart';
+import '../../features/user/views/user_identification_view.dart';
 import '../di/injection_container.dart';
 
 class AppRouter {
