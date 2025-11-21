@@ -1,11 +1,14 @@
 import 'package:get_it/get_it.dart';
 
 import '../../features/main/view_models/main_view_model.dart';
+import '../../features/menu/repositories/menu_repository.dart';
+import '../../features/menu/view_models/menu_view_model.dart';
 import '../../features/onboarding/repositories/onboarding_repository.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
 import '../../features/splash/view_models/splash_view_model.dart';
 import '../../features/user/repositories/user_repository.dart';
 import '../../features/user/view_models/user_identification_view_model.dart';
+import '../../shared/services/api_service.dart';
 import '../../shared/services/local_preferences_service.dart';
 import '../../shared/view_models/cart_global_view_model.dart';
 import '../../shared/view_models/user_global_view_model.dart';
@@ -16,6 +19,8 @@ void setupDependencies() {
   getIt.registerLazySingleton<LocalPreferencesService>(
     () => LocalPreferencesService(),
   );
+
+  getIt.registerLazySingleton<ApiService>(() => ApiService());
 
   getIt.registerFactory<SplashViewModel>(() => SplashViewModel());
 
@@ -35,10 +40,18 @@ void setupDependencies() {
     () => UserGlobalViewModel(getIt<UserRepository>()),
   );
 
-  getIt.registerFactory<MainViewModel>(() => MainViewModel());
-
   getIt.registerFactory<UserIdentificationViewModel>(
     () => UserIdentificationViewModel(),
+  );
+
+  getIt.registerFactory<MainViewModel>(() => MainViewModel());
+
+  getIt.registerFactory<MenuRepository>(
+    () => MenuRepository(getIt<ApiService>()),
+  );
+
+  getIt.registerFactory<MenuViewModel>(
+    () => MenuViewModel(getIt<MenuRepository>()),
   );
 
   getIt.registerLazySingleton<CartGlobalViewModel>(() => CartGlobalViewModel());
