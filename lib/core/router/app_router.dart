@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../features/main/view_models/main_view_model.dart';
 import '../../features/main/views/main_view.dart';
+import '../../features/menu/view_models/menu_view_model.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
 import '../../features/onboarding/views/onboarding_view.dart';
 import '../../features/splash/view_models/splash_view_model.dart';
@@ -18,9 +19,6 @@ class AppRouter {
   static const String onboarding = '/onboarding';
   static const String userIdentification = '/user-identification';
   static const String main = '/main';
-  static const String menu = '/menu';
-  static const String cart = '/cart';
-  static const String orders = '/orders';
 
   static Map<String, WidgetBuilder> get routes => {
     splash: (context) => ChangeNotifierProvider(
@@ -38,21 +36,16 @@ class AppRouter {
       child: const UserIdentificationView(),
     ),
 
-    main: (context) => ChangeNotifierProvider(
-      create: (_) => getIt<MainViewModel>(),
+    main: (context) => MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => getIt<MainViewModel>()),
+
+        // ChangeNotifierProvider(create: (_) => getIt<CartViewModel>()),
+        ChangeNotifierProvider(create: (_) => getIt<MenuViewModel>()),
+
+        // ChangeNotifierProvider(create: (_) => getIt<OrdersViewModel>()),
+      ],
       child: const MainView(),
     ),
-
-    // menu: (context) => ChangeNotifierProvider(
-    //   create: (_) => getIt<MenuViewModel>(),
-    //   child: const MenuView(),
-    // ),
-
-    // cart: (context) => const CartView(),
-
-    // orders: (context) => ChangeNotifierProvider(
-    //   create: (_) => getIt<OrdersViewModel>(),
-    //   child: const OrdersView(),
-    // ),
   };
 }
