@@ -27,12 +27,12 @@ class MainView extends StatelessWidget {
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.receipt_long_outlined),
-            selectedIcon: Icon(Icons.fastfood),
+            selectedIcon: Icon(Icons.receipt_long),
             label: 'Pedidos',
           ),
           NavigationDestination(
             icon: Icon(Icons.fastfood_outlined),
-            selectedIcon: Icon(Icons.receipt_long),
+            selectedIcon: Icon(Icons.fastfood),
             label: 'Menu',
           ),
           NavigationDestination(
