@@ -6,6 +6,8 @@ import '../../features/menu/repositories/menu_repository.dart';
 import '../../features/menu/view_models/menu_view_model.dart';
 import '../../features/onboarding/repositories/onboarding_repository.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
+import '../../features/orders/repositories/orders_repository.dart';
+import '../../features/orders/view_models/orders_view_model.dart';
 import '../../features/splash/view_models/splash_view_model.dart';
 import '../../features/user/repositories/user_repository.dart';
 import '../../features/user/view_models/user_identification_view_model.dart';
@@ -59,5 +61,11 @@ void setupDependencies() {
 
   getIt.registerLazySingleton<CartGlobalViewModel>(
     () => CartGlobalViewModel(getIt<OrderCalculator>()),
+  );
+
+  getIt.registerFactory<OrdersRepository>(() => OrdersRepository());
+
+  getIt.registerFactory<OrdersViewModel>(
+    () => OrdersViewModel(getIt<OrdersRepository>()),
   );
 }

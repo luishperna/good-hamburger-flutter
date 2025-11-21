@@ -6,6 +6,7 @@ import '../../features/main/views/main_view.dart';
 import '../../features/menu/view_models/menu_view_model.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
 import '../../features/onboarding/views/onboarding_view.dart';
+import '../../features/orders/view_models/orders_view_model.dart';
 import '../../features/splash/view_models/splash_view_model.dart';
 import '../../features/splash/views/splash_view.dart';
 import '../../features/user/view_models/user_identification_view_model.dart';
@@ -43,7 +44,7 @@ class AppRouter {
         // ChangeNotifierProvider(create: (_) => getIt<CartViewModel>()),
         ChangeNotifierProvider(create: (_) => getIt<MenuViewModel>()),
 
-        // ChangeNotifierProvider(create: (_) => getIt<OrdersViewModel>()),
+        ChangeNotifierProvider(create: (_) => getIt<OrdersViewModel>()),
       ],
       child: const MainView(),
     ),
