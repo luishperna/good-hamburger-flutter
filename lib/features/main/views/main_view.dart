@@ -36,8 +36,15 @@ class MainView extends StatelessWidget {
             label: 'Menu',
           ),
           NavigationDestination(
-            icon: Icon(Icons.shopping_cart_outlined),
-            selectedIcon: Icon(Icons.person),
+            icon: Badge(
+              label: Text('3'),
+              isLabelVisible: true,
+              child: Icon(Icons.shopping_cart_outlined),
+            ),
+            selectedIcon: Badge(
+              label: Text('3'),
+              child: Icon(Icons.shopping_cart),
+            ),
             label: 'Carrinho',
           ),
         ],
