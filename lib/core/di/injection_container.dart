@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 
+import '../../features/main/view_models/main_view_model.dart';
 import '../../features/onboarding/repositories/onboarding_repository.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
 import '../../features/splash/view_models/splash_view_model.dart';
@@ -33,6 +34,8 @@ void setupDependencies() {
   getIt.registerLazySingleton<UserGlobalViewModel>(
     () => UserGlobalViewModel(getIt<UserRepository>()),
   );
+
+  getIt.registerFactory<MainViewModel>(() => MainViewModel());
 
   getIt.registerFactory<UserIdentificationViewModel>(
     () => UserIdentificationViewModel(),

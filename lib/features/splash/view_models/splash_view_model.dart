@@ -15,7 +15,7 @@ class SplashViewModel extends ChangeNotifier {
     if (!context.mounted) return;
 
     final String routeName = userGlobal.isUserIdentified
-        ? AppRouter.menu
+        ? AppRouter.main
         : AppRouter.onboarding;
     Navigator.pushReplacementNamed(context, routeName);
   }

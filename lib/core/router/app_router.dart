@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../features/main/view_models/main_view_model.dart';
+import '../../features/main/views/main_view.dart';
 import '../../features/onboarding/view_models/onboarding_view_model.dart';
 import '../../features/onboarding/views/onboarding_view.dart';
 import '../../features/splash/view_models/splash_view_model.dart';
@@ -15,6 +17,7 @@ class AppRouter {
   static const String splash = '/';
   static const String onboarding = '/onboarding';
   static const String userIdentification = '/user-identification';
+  static const String main = '/main';
   static const String menu = '/menu';
   static const String cart = '/cart';
   static const String orders = '/orders';
@@ -33,6 +36,11 @@ class AppRouter {
     userIdentification: (context) => ChangeNotifierProvider(
       create: (_) => getIt<UserIdentificationViewModel>(),
       child: const UserIdentificationView(),
+    ),
+
+    main: (context) => ChangeNotifierProvider(
+      create: (_) => getIt<MainViewModel>(),
+      child: const MainView(),
     ),
 
     // menu: (context) => ChangeNotifierProvider(

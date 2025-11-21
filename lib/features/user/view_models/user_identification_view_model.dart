@@ -26,7 +26,7 @@ class UserIdentificationViewModel extends ChangeNotifier {
 
     getIt<UserGlobalViewModel>().setUserName(name);
 
-    Navigator.pushReplacementNamed(context, AppRouter.menu);
+    Navigator.pushReplacementNamed(context, AppRouter.main);
   }
 
   @override
