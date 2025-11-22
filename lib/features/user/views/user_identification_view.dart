@@ -12,10 +12,9 @@ class UserIdentificationView extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
           child: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -23,15 +22,15 @@ class UserIdentificationView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Icon(
-                    Icons.fastfood_rounded,
-                    size: 64,
-                    color: theme.primaryColor,
+                    Icons.account_circle_rounded,
+                    size: 80,
+                    color: theme.primaryColor.withValues(alpha: 0.8),
                   ),
                   const SizedBox(height: 32),
 
                   Text(
-                    "Welcome!",
-                    style: theme.textTheme.headlineMedium?.copyWith(
+                    "What's your name?",
+                    style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -39,53 +38,75 @@ class UserIdentificationView extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Tell us your name to start ordering.",
+                    "Enter the name that will be used for your orders.",
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: Colors.grey[600],
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 40),
 
                   TextField(
                     controller: viewModel.nameController,
                     onChanged: viewModel.validateInput,
+                    autofocus: true,
                     decoration: InputDecoration(
                       labelText: "Your Name",
                       hintText: "Ex: John Doe",
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide(color: Colors.grey[300]!),
                       ),
-                      prefixIcon: const Icon(Icons.person_outline),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide(color: Colors.grey[300]!),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide(
+                          color: theme.primaryColor,
+                          width: 2,
+                        ),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.person_outline,
+                        color: Colors.grey[600],
+                      ),
                       filled: true,
                       fillColor: Colors.grey[50],
+                      helperText: "Minimum of 3 characters",
                     ),
                     textInputAction: TextInputAction.done,
                     onSubmitted: (_) => viewModel.submit(context),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 32),
 
                   Selector<UserIdentificationViewModel, bool>(
                     selector: (_, vm) => vm.isFormValid,
                     builder: (context, isValid, child) {
-                      return ElevatedButton(
-                        onPressed: isValid
-                            ? () => viewModel.submit(context)
-                            : null,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: theme.primaryColor,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                      return SizedBox(
+                        height: 56,
+                        child: ElevatedButton(
+                          onPressed: isValid
+                              ? () => viewModel.submit(context)
+                              : null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: theme.primaryColor,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            elevation: 0,
+                            splashFactory: isValid
+                                ? InkRipple.splashFactory
+                                : NoSplash.splashFactory,
                           ),
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          "Continue",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                          child: const Text(
+                            "Save Name",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       );
