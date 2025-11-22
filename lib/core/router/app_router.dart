@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../features/cart/repositories/cart_repository.dart';
 import '../../features/main/view_models/main_view_model.dart';
 import '../../features/main/views/main_view.dart';
 import '../../features/menu/view_models/menu_view_model.dart';
@@ -41,10 +42,11 @@ class AppRouter {
       providers: [
         ChangeNotifierProvider(create: (_) => getIt<MainViewModel>()),
 
-        // ChangeNotifierProvider(create: (_) => getIt<CartViewModel>()),
         ChangeNotifierProvider(create: (_) => getIt<MenuViewModel>()),
 
         ChangeNotifierProvider(create: (_) => getIt<OrdersViewModel>()),
+
+        Provider<CartRepository>(create: (_) => getIt<CartRepository>()),
       ],
       child: const MainView(),
     ),

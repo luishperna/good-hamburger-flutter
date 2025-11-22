@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:good_hamburger/shared/domain/order_calculator.dart';
 
+import '../../features/cart/repositories/cart_repository.dart';
 import '../../features/main/view_models/main_view_model.dart';
 import '../../features/menu/repositories/menu_repository.dart';
 import '../../features/menu/view_models/menu_view_model.dart';
@@ -58,6 +59,10 @@ void setupDependencies() {
   );
 
   getIt.registerFactory<OrderCalculator>(() => OrderCalculator());
+
+  getIt.registerFactory<CartRepository>(
+    () => CartRepository(getIt<ApiService>()),
+  );
 
   getIt.registerLazySingleton<CartGlobalViewModel>(
     () => CartGlobalViewModel(getIt<OrderCalculator>()),
