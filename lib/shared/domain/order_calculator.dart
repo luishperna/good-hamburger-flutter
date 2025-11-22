@@ -8,19 +8,14 @@ class OrderCalculator {
 
   double calculateDiscountPercentage(List<ItemModel> items) {
     final hasSandwich = items.any((i) => i.category == CategoryEnum.sandwich);
+    final hasFries = items.any((i) => i.category == CategoryEnum.fries);
+    final hasDrink = items.any((i) => i.category == CategoryEnum.drink);
 
-    final hasFries = items.any((i) => i.name.toLowerCase().contains('fries'));
-    final hasSoftDrink = items.any(
-      (i) =>
-          i.name.toLowerCase().contains('soft drink') ||
-          i.name.toLowerCase().contains('soda'),
-    );
-
-    if (hasSandwich && hasFries && hasSoftDrink) {
+    if (hasSandwich && hasFries && hasDrink) {
       return 0.20;
     }
 
-    if (hasSandwich && hasSoftDrink) {
+    if (hasSandwich && hasDrink) {
       return 0.15;
     }
 
