@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/onboarding_item_model.dart';
 
@@ -13,27 +12,38 @@ class OnboardingCarouselItem extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.all(24.0),
+      padding: const EdgeInsets.symmetric(horizontal: 32.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SvgPicture.asset(item.imagePath, height: 300, fit: BoxFit.contain),
-          const SizedBox(height: 32),
+          const Spacer(flex: 1),
+
+          Icon(item.icon, size: 180, color: theme.primaryColor),
+
+          const SizedBox(height: 48),
+
           Text(
             item.title,
             style: theme.textTheme.headlineSmall?.copyWith(
               fontWeight: FontWeight.bold,
+              color: theme.primaryColor,
             ),
             textAlign: TextAlign.center,
           ),
+
           const SizedBox(height: 16),
+
           Text(
             item.description,
             textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: theme.textTheme.bodyLarge?.copyWith(
               color: Colors.grey[600],
+              height: 1.5,
+              fontSize: 16,
             ),
           ),
+
+          const Spacer(flex: 1),
         ],
       ),
     );
