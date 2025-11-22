@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
+import 'json_storage_service.dart';
+
 class ApiService {
   static const String _baseUrl = 'api.good-hamburger.com';
   static const String _localMockPath = 'assets/mocks/data';
@@ -34,6 +36,29 @@ class ApiService {
       return json.decode(response);
     } catch (e) {
       throw Exception('Falha na API Mock ao acessar $endpoint: $e');
+    }
+  }
+
+  /// Simula um HTTP POST request salvando os dados do [body] em um JSON local.
+  ///
+  /// O nome do arquivo local é determinado pelo [endpoint] (ex: '/order' salva em 'order.json').
+  Future<dynamic> post(
+    String endpoint, {
+    required Map<String, dynamic> body,
+  }) async {
+    await Future.delayed(const Duration(seconds: 1));
+
+    try {
+      final Uri uri = Uri.parse(endpoint);
+      final String resourceName = uri.path.replaceAll(RegExp(r'^/'), '');
+      final String fileName = '$resourceName.json';
+
+      final storageService = JsonStorageService(fileName);
+      await storageService.saveJson(body);
+
+      return {'success': true, 'data': body};
+    } catch (e) {
+      throw Exception('Falha na API Mock ao enviar dados para $endpoint: $e');
     }
   }
 }

@@ -3,9 +3,13 @@ import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import '../../../core/di/injection_container.dart';
+import '../../../shared/models/order_model.dart';
 import '../../../shared/utils/extensions/currency_extension.dart';
 import '../../../shared/view_models/cart_global_view_model.dart';
 import '../../../shared/view_models/user_global_view_model.dart';
+import '../../orders/models/order_status_enum.dart';
+import '../repositories/cart_repository.dart';
 import '../view_models/cart_page_view_model.dart';
 import 'user_info_card.dart';
 
@@ -128,7 +132,7 @@ class CartSummarySection extends StatelessWidget {
     BuildContext context,
     CartGlobalViewModel cart,
     UserGlobalViewModel user,
-  ) {
+  ) async {
     if (!user.isUserIdentified) {
       showTopSnackBar(
         Overlay.of(context),
@@ -139,10 +143,34 @@ class CartSummarySection extends StatelessWidget {
       return;
     }
 
-    showTopSnackBar(
-      Overlay.of(context),
-      const CustomSnackBar.success(message: "Order submitted successfully!"),
+    final cartRepository = getIt<CartRepository>();
+    final uniqueId = DateTime.now().millisecondsSinceEpoch.toString();
+
+    final newOrder = OrderModel(
+      id: DateTime.now().millisecondsSinceEpoch,
+      code: uniqueId.substring(uniqueId.length - 4),
+      date: DateTime.now(),
+      items: cart.items,
+      subtotal: cart.subtotal,
+      discount: cart.discountValue,
+      total: cart.total,
+      status: OrderStatusEnum.preparing,
+      orderedBy: user.user!,
     );
-    cart.clearCart();
+
+    try {
+      await cartRepository.saveOrder(newOrder);
+
+      showTopSnackBar(
+        Overlay.of(context),
+        const CustomSnackBar.success(message: "Order submitted successfully!"),
+      );
+      cart.clearCart();
+    } catch (e) {
+      showTopSnackBar(
+        Overlay.of(context),
+        CustomSnackBar.error(message: "Failed to submit order: $e"),
+      );
+    }
   }
 }
