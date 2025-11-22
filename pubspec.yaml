@@ -38,8 +38,8 @@ dependencies:
   shared_preferences: ^2.5.3
   provider: ^6.1.5+1
   get_it: ^9.0.5
-  flutter_svg: ^2.2.2
   intl: ^0.20.2
+  top_snackbar_flutter: ^3.3.0
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +66,7 @@ flutter:
   assets:
     - assets/images/
     - assets/mocks/data/
-    - assets/mocks/images/
+    - assets/mocks/images/menu/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
