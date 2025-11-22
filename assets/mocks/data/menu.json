@@ -2,41 +2,41 @@
   {
     "id": 1,
     "category": "sandwich",
-    "name": "The Brie-liant Truffle Stack",
-    "description": "Prepare-se para uma explosão de sabor. Dois burgers de 150g de costela angus, coroados com queijo brie derretido, bacon crocante, cebola caramelizada e cogumelos salteados na manteiga de trufas. Tudo isso envolto em um pão brioche artesanal e finalizado com nosso exclusivo molho de alho negro. Uma experiência inesquecível a cada mordida.",
-    "price": 4590,
-    "imagePath": "assets/mocks/images/item_1.jpg"
+    "name": "Burger",
+    "description": "A classic, juicy beef burger served on a fresh bun.",
+    "price": 500,
+    "imagePath": "assets/mocks/images/menu/item_1.jpg"
   },
   {
     "id": 2,
     "category": "sandwich",
-    "name": "The Pastrami Rustico",
-    "description": "Uma combinação clássica e irresistível. Fatias generosas de pastrami quente e suculento, cobertas por queijo gruyère derretido, cebola caramelizada adocicada, rúcula fresca e mostarda em grãos picante. Tudo isso servido em um pão ciabatta rústico e crocante. Acompanha um picles de endro.",
-    "price": 3690,
-    "imagePath": "assets/mocks/images/item_2.jpg"
+    "name": "Egg",
+    "description": "A hearty sandwich featuring fresh eggs and tasty toppings.",
+    "price": 450,
+    "imagePath": "assets/mocks/images/menu/item_2.jpg"
   },
   {
     "id": 3,
     "category": "sandwich",
-    "name": "Ciabatta Toscana Melt",
-    "description": "Uma combinação rústica e cheia de sabor. Pão ciabatta crocante, recheado com generosas fatias de linguiça toscana grelhada, envoltas em queijo provolone derretido. Completa o sabor um mix de pimentões e cebolas salteados, nosso molho de tomate rústico da casa e folhas frescas de manjericão para finalizar. Servido quente e suculento.",
-    "price": 3690,
-    "imagePath": "assets/mocks/images/item_3.jpg"
+    "name": "Bacon",
+    "description": "A savory sandwich piled high with crispy bacon and cheese.",
+    "price": 700,
+    "imagePath": "assets/mocks/images/menu/item_3.jpg"
   },
   {
     "id": 4,
-    "category": "extras",
+    "category": "fries",
     "name": "Fries",
-    "description": "A porção perfeita para compartilhar (ou não!). Nossas batatas fritas de corte grosso, crocantes e douradas, são generosamente cobertas com um molho de queijo cheddar cremoso e derretido, pedaços crocantes de bacon, cebolinha fresca e um toque final de molho ranch. Uma explosão de sabor a cada garfada.",
-    "price": 2990,
-    "imagePath": "assets/mocks/images/item_4.jpg"
+    "description": "Crispy golden french fries, perfect as a side.",
+    "price": 200,
+    "imagePath": "assets/mocks/images/menu/item_4.jpg"
   },
   {
     "id": 5,
-    "category": "extras",
-    "name": "Classic Craft Cola",
-    "description": "Refrescância pura em cada gole. Nossa cola artesanal, servida estupidamente gelada com muito gelo, uma fatia de limão fresco e um toque de hortelã para realçar o sabor. O acompanhamento perfeito para o seu lanche.",
-    "price": 1290,
-    "imagePath": "assets/mocks/images/item_5.jpg"
+    "category": "drink",
+    "name": "Soft Drink",
+    "description": "A refreshing, ice-cold soft drink to complete your meal.",
+    "price": 250,
+    "imagePath": "assets/mocks/images/menu/item_5.jpg"
   }
 ]
