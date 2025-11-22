@@ -12,7 +12,7 @@ class GoodHamburgerApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppConfig.name,
-      theme: AppTheme.theme,
+      theme: AppTheme.lightTheme,
       initialRoute: AppRouter.splash,
       routes: AppRouter.routes,
     );
