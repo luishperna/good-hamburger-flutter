@@ -30,4 +30,15 @@ class ItemModel {
       ),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'category': category.name,
+      'name': name,
+      'description': description,
+      'price': price,
+      'imagePath': imagePath,
+    };
+  }
 }
