@@ -40,6 +40,7 @@ dependencies:
   get_it: ^9.0.5
   intl: ^0.20.2
   top_snackbar_flutter: ^3.3.0
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:
