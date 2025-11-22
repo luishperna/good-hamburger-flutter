@@ -15,56 +15,84 @@ class MenuFilterSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 60,
+      width: 70,
       color: Colors.white,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildFilterItem(context, null, "Todos"),
-          const SizedBox(height: 16),
-          _buildFilterItem(context, CategoryEnum.sandwich, "Lanches"),
-          const SizedBox(height: 16),
-          _buildFilterItem(context, CategoryEnum.extras, "Extras"),
-          const SizedBox(height: 40),
+          _buildFilterIcon(context, null, Icons.restaurant_menu_rounded, "All"),
+          const SizedBox(height: 32),
+          _buildFilterIcon(
+            context,
+            CategoryEnum.sandwich,
+            Icons.lunch_dining_rounded,
+            "Sandwiches",
+          ),
+          const SizedBox(height: 32),
+          _buildFilterIcon(
+            context,
+            CategoryEnum.extras,
+            Icons.local_drink_rounded,
+            "Extras",
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildFilterItem(
+  Widget _buildFilterIcon(
     BuildContext context,
     CategoryEnum? category,
-    String label,
+    IconData icon,
+    String tooltip,
   ) {
     final isSelected = selectedCategory == category;
     final theme = Theme.of(context);
+    final color = isSelected ? theme.primaryColor : Colors.grey[400];
 
     return GestureDetector(
       onTap: () => onCategorySelected(category),
       behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        width: double.infinity,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          border: isSelected
-              ? Border(left: BorderSide(color: theme.primaryColor, width: 4))
-              : const Border(
-                  left: BorderSide(color: Colors.transparent, width: 4),
+      child: Tooltip(
+        message: tooltip,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: isSelected
+                ? Border(right: BorderSide(color: theme.primaryColor, width: 3))
+                : const Border(
+                    right: BorderSide(color: Colors.transparent, width: 3),
+                  ),
+          ),
+          child: Column(
+            children: [
+              AnimatedScale(
+                scale: isSelected ? 1.1 : 1.0,
+                duration: const Duration(milliseconds: 300),
+                child: Icon(icon, color: color, size: 28),
+              ),
+
+              AnimatedSize(
+                duration: const Duration(milliseconds: 300),
+                child: SizedBox(
+                  height: isSelected ? null : 0,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Text(
+                      tooltip,
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-        ),
-        child: RotatedBox(
-          quarterTurns: 3,
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.labelLarge?.copyWith(
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected ? theme.primaryColor : Colors.grey[400],
-              fontSize: 16,
-            ),
+              ),
+            ],
           ),
         ),
       ),

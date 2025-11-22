@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_hamburger/shared/utils/extensions/category_ui_extension.dart';
 
 import '../models/category_enum.dart';
 import '../models/item_model.dart';
@@ -48,13 +49,17 @@ class MenuViewModel extends ChangeNotifier {
   }
 
   void _filterItems() {
-    if (_selectedCategory != null) {
-      _filteredItems = _allItems
-          .where((item) => item.category == _selectedCategory)
-          .toList();
+    if (_selectedCategory == null) {
+      _filteredItems = List.from(_allItems);
       return;
     }
 
-    _filteredItems = List.from(_allItems);
+    _filteredItems = _allItems.where((item) {
+      if (_selectedCategory == CategoryEnum.extras) {
+        return item.category.isExtraGroupType;
+      }
+
+      return item.category == _selectedCategory;
+    }).toList();
   }
 }

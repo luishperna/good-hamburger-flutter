@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../shared/view_models/cart_global_view_model.dart';
 import '../../../shared/view_models/user_global_view_model.dart';
 import '../view_models/menu_view_model.dart';
 import '../widgets/item_card.dart';
@@ -28,10 +27,9 @@ class _MenuViewState extends State<MenuView> {
     final userGlobal = context.watch<UserGlobalViewModel>();
     final menu = context.watch<MenuViewModel>();
     final theme = Theme.of(context);
-    final userName = userGlobal.user?.name ?? 'Cliente';
+    final userName = userGlobal.user?.name ?? 'Guest';
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +40,7 @@ class _MenuViewState extends State<MenuView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Olá, $userName",
+                    "Hello, $userName",
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
@@ -50,7 +48,7 @@ class _MenuViewState extends State<MenuView> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "O que vamos comer hoje?",
+                    "What are we eating today?",
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: Colors.grey[600],
                     ),
@@ -80,83 +78,23 @@ class _MenuViewState extends State<MenuView> {
                                 children: [
                                   CircularProgressIndicator(),
                                   SizedBox(height: 16),
-                                  Text("Carregando itens..."),
+                                  Text("Loading items..."),
                                 ],
                               ),
                             )
                           : menu.items.isEmpty
                           ? const Center(
-                              child: Text("Nenhum item nesta categoria :("),
+                              child: Text("No items found in this category :("),
                             )
                           : ListView.builder(
                               itemCount: menu.items.length,
-                              padding: const EdgeInsets.only(
-                                bottom: 20,
-                                top: 10,
-                              ),
+                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 100),
                               itemBuilder: (context, index) {
                                 final item = menu.items[index];
 
-                                return ItemCard(
-                                  item: item,
-                                  onTap: () {
-                                    // 1. Acessa o Carrinho (Usamos READ porque é uma ação única, não queremos ouvir mudanças aqui)
-                                    final cart = context
-                                        .read<CartGlobalViewModel>();
-
-                                    try {
-                                      // 2. Tenta adicionar (A lógica de validação está dentro do addItem)
-                                      cart.addItem(item);
-
-                                      // 3. Feedback de SUCESSO (Sênior UX)
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).hideCurrentSnackBar(); // Limpa anteriores
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            '${item.name} adicionado! 🛒',
-                                          ),
-                                          backgroundColor: Colors.green[700],
-                                          behavior: SnackBarBehavior.floating,
-                                          // Fica flutuando, mais moderno
-                                          duration: const Duration(seconds: 1),
-                                          action: SnackBarAction(
-                                            label: 'DESFAZER',
-                                            textColor: Colors.white,
-                                            onPressed: () =>
-                                                cart.removeItem(item),
-                                          ),
-                                        ),
-                                      );
-                                    } catch (e) {
-                                      // 4. Feedback de ERRO (Regra de Negócio violada)
-                                      // Removemos o prefixo "Exception:" pra ficar bonito
-                                      final message = e.toString().replaceAll(
-                                        'Exception: ',
-                                        '',
-                                      );
-
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).hideCurrentSnackBar();
-                                      ScaffoldMessenger.of(
-                                        context,
-                                      ).showSnackBar(
-                                        SnackBar(
-                                          content: Text(message),
-                                          backgroundColor: Colors.red[700],
-                                          behavior: SnackBarBehavior.floating,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                );
+                                return ItemCard(item: item);
                               },
                             ),
-                      // ...
                     ),
                   ),
                 ],
