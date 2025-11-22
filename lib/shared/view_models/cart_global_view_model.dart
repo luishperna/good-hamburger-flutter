@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../features/menu/models/category_enum.dart';
 import '../../features/menu/models/item_model.dart';
 import '../domain/order_calculator.dart';
 
@@ -23,9 +24,32 @@ class CartGlobalViewModel extends ChangeNotifier {
 
   int get total => _calculator.calculateTotal(_items);
 
-  void addItem(ItemModel item) {
-    _items.removeWhere((i) => i.id == item.id);
-    _items.add(item);
+  void addItem(ItemModel newItem) {
+    // 1. Verifica se já existe algum item na lista com a mesma categoria do novo item.
+    final exists = _items.any(
+      (existingItem) => existingItem.category == newItem.category,
+    );
+
+    if (exists) {
+      String categoryName;
+      switch (newItem.category) {
+        case CategoryEnum.sandwich:
+          categoryName = "one sandwich";
+          break;
+        case CategoryEnum.fries:
+          categoryName = "one portion of fries";
+          break;
+        case CategoryEnum.drink:
+          categoryName = "one drink";
+          break;
+        case CategoryEnum.extras:
+          categoryName = "one item from this category";
+          break;
+      }
+      throw Exception("You can only add $categoryName per order.");
+    }
+
+    _items.add(newItem);
     notifyListeners();
   }
 
