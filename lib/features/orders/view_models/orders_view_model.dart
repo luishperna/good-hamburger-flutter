@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:good_hamburger/features/orders/models/order_model.dart';
+import 'package:good_hamburger/shared/models/order_model.dart';
 
 import '../repositories/orders_repository.dart';
 

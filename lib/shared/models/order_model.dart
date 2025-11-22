@@ -1,6 +1,7 @@
 import 'package:good_hamburger/features/orders/models/order_status_enum.dart';
 
-import '../../menu/models/item_model.dart';
+import '../../features/menu/models/item_model.dart';
+import 'user_model.dart';
 
 class OrderModel {
   final int id;
@@ -11,6 +12,7 @@ class OrderModel {
   final int discount;
   final int total;
   final OrderStatusEnum status;
+  final UserModel orderedBy;
 
   const OrderModel({
     required this.id,
@@ -21,5 +23,20 @@ class OrderModel {
     required this.discount,
     required this.total,
     required this.status,
+    required this.orderedBy,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'code': code,
+      'date': date.toIso8601String(),
+      'items': items.map((i) => i.toJson()).toList(),
+      'subtotal': subtotal,
+      'discount': discount,
+      'total': total,
+      'status': status.name,
+      'orderedBy': orderedBy.toJson(),
+    };
+  }
 }

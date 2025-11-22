@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/models/order_model.dart';
 import '../../../shared/utils/extensions/currency_extension.dart';
 import '../../../shared/utils/extensions/date_extension.dart';
-import '../models/order_model.dart';
 import '../models/order_status_enum.dart';
 
 class OrderCard extends StatelessWidget {
@@ -20,15 +20,15 @@ class OrderCard extends StatelessWidget {
     switch (order.status) {
       case OrderStatusEnum.delivered:
         statusColor = Colors.green;
-        statusText = "Entregue";
+        statusText = "Delivered";
         break;
       case OrderStatusEnum.canceled:
         statusColor = Colors.red;
-        statusText = "Cancelado";
+        statusText = "Canceled";
         break;
       default:
         statusColor = Colors.orange;
-        statusText = "Em Preparo";
+        statusText = "Preparing";
     }
 
     return Container(
@@ -114,7 +114,7 @@ class OrderCard extends StatelessWidget {
 
           if (order.discount > 0)
             _buildFinancialRow(
-              label: "Desconto",
+              label: "Discount",
               value: "- ${order.discount.toCurrency}",
               valueColor: Colors.red,
             ),

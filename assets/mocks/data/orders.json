@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "code": "2345",
+    "date": "2025-11-21T23:33:40.123Z",
+    "items": [
+      {
+        "id": 1,
+        "category": "sandwich",
+        "name": "Burger",
+        "description": "A classic, juicy beef burger served on a fresh bun.",
+        "price": 500,
+        "imagePath": "assets/mocks/images/menu/item_1.jpg"
+      }
+    ],
+    "subtotal": 500,
+    "discount": 0,
+    "total": 500,
+    "status": "preparing",
+    "orderedBy": {
+      "name": "Luís"
+    }
+  },
+  {
+    "id": 2,
+    "code": "2346",
+    "date": "2025-11-21T23:33:40.123Z",
+    "items": [
+      {
+        "id": 1,
+        "category": "sandwich",
+        "name": "Burger",
+        "description": "A classic, juicy beef burger served on a fresh bun.",
+        "price": 500,
+        "imagePath": "assets/mocks/images/menu/item_1.jpg"
+      },
+      {
+        "id": 4,
+        "category": "fries",
+        "name": "Fries",
+        "description": "Crispy golden french fries, perfect as a side.",
+        "price": 200,
+        "imagePath": "assets/mocks/images/menu/item_4.jpg"
+      }
+    ],
+    "subtotal": 700,
+    "discount": 70,
+    "total": 630,
+    "status": "delivered",
+    "orderedBy": {
+      "name": "Perna"
+    }
+  }
+]
