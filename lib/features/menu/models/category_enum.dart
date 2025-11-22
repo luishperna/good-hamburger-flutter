@@ -1,1 +1,1 @@
-enum CategoryEnum { sandwich, extras }
+enum CategoryEnum { sandwich, fries, drink, extras }
