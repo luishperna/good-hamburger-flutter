@@ -1,137 +1,170 @@
-# 🍔 GOOD HAMBURGER — Mobile Ordering App
+<div align="center">
+  <img height="80" alt="logo" src="https://github.com/user-attachments/assets/381445fe-fe12-4281-8839-cf676d3b62b6" />
+</div>
+<br>
 
-Aplicação mobile frontend para um sistema de pedidos de hamburgueria, desenvolvida com foco em *
-*regras de negócio robustas**, **arquitetura limpa** e **padrões profissionais de desenvolvimento**.
-
----
-
-## 🎯 Objetivo
-
-Construir um app de pedidos aplicando corretamente:
-
-* Regras de negócio (descontos + unicidade do carrinho)
-* Arquitetura limpa orientada a features
-* Injeção de dependência
-* Gerenciamento de estado com ViewModels
-* Testes unitários de lógica de domínio
+<div align="center">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
+  <img src="https://img.shields.io/badge/Mobile-black?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE3LDE5SDdWNUgxN00xNywxSDdDNS44OSwxIDUsMS44OSA1LDNWMjFBMiwyIDAgMCwwIDcsMjNIMTdBMiwyIDAgMCwwIDE5LDIxVjNDMTksMS44OSAxOC4xLDEgMTcsMVoiIGZpbGw9IndoaXRlIi8+PC9zdmc+" />
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" />
+</div>
 
 ---
 
-## ✨ Conquistas Arquiteturais
+<h3 align="center">📱 Acabou de sair da "chapa", o seu novo app de pedidos de lanches irresistíveis 🍔</h3>
 
-| Conquista                       | Demonstração                                                                                      | Requisito Atendido              |
-|---------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------|
-| **Arquitetura Limpa**           | Estrutura *Feature-First*, separando Domain, Repository e ViewModel                               | Padrão de Arquitetura           |
-| **Testes Unitários**            | Projeto de testes validando a lógica de cálculos de desconto                                      | Bônus — Unit Test Project       |
-| **Injeção de Dependência (DI)** | Uso de **GetIt** para desacoplar criação de Repositórios e ViewModels da UI                       | Uso de State Management Library |
-| **Scoped Providers**            | Injeção de ViewModels específicos por rota (ex: `MenuViewModel` em `/main`) via *factory pattern* | Gerenciamento de Estado         |
-| **Simulação de API**            | `ApiService` genérico simulando chamada HTTP (inclui latência de 1s)                              | Data Fetching                   |
+<div align="center">
+  <video src="https://github.com/user-attachments/assets/e2103095-bf1a-41d8-a9c9-65ea787fcf49" width="380" />
+</div>
+
+<div align="center">
+    <p>
+        Escolher o seu pedido nunca foi tão fácil e moderno como agora!
+        <br>
+        <b>Peça já e veja os descontos especiais que preparamos para você = )</b>
+    </p>
+</div>
 
 ---
 
-## 💻 Estrutura do Projeto (Feature-First)
+# Documentação
+
+## :bookmark_tabs: Sumário
+
+- [:dart: Objetivo](#dart-objetivo)
+- [:triangular_ruler: Arquitetura](#triangular_ruler-arquitetura)
+- [:file_folder: Estrutura de Pastas](#file_folder-estrutura-feature-first)
+- [:man_technologist: Tecnologias e Ferramentas](#man_technologist-tecnologias-e-ferramentas)
+- [:computer: Como rodar](#computer-como-rodar)
+- [:game_die: Mocks (Dados Simulados)](#game_die-mocks-dados-simulados)
+- [:construction: Limitações e Próximos Passos](#construction-limitações-e-próximos-passos)
+- [:pencil: Autor](#pencil-autor)
+ 
+---
+
+## :dart: Objetivo
+
+O **Good Hamburger** foi desenvolvido para oferecer uma experiência completa de pedidos de sanduíches e acompanhamentos. O aplicativo simula um ambiente real de produção, abrangendo desde o primeiro acesso do usuário até a finalização do pedido.
+
+**Principais Funcionalidades:**
+* **Onboarding & Identificação:** Fluxo de integração e registro simplificado.
+* **Navegação:** Splash screen, menu interativo, carrinho de compras e histórico de pedidos.
+
+**Destaques Técnicos:**
+O projeto foi construído com foco em escalabilidade e qualidade de código, utilizando arquitetura limpa. A estrutura segue as melhores práticas do mercado atual, incluindo a implementação de testes automatizados e um design de software moderno.
+
+---
+
+## :triangular_ruler: Arquitetura
+
+Para a arquitetura do projeto, foi utilizado o padrão **MVVM (Model-View-ViewModel)** conforme recomendação da [documentação oficial do Flutter](https://docs.flutter.dev/app-architecture), ilustrado abaixo:
+
+<img width="100%" alt="mvvm" src="https://github.com/user-attachments/assets/8173d082-35dd-46fe-9d49-f47831303906" />
+
+---
+
+## :file_folder: Estrutura (Feature-First)
+
+A organização das pastas segue a separação por funcionalidades:
 
 ```
+assets/                          # Arquivos estáticos
+├── images/
+└── mocks/                       # Mocks da API (JSON) e dados para testes
+
+docs/                            # Documentos base para início do desenvolvimento
+├── architecture/
+└── designs/ 
+
 lib/
-├── core/                        
-│   ├── di/                      # Configuração do GetIt
-│   ├── router/                  # Rotas nomeadas + injeção de providers
-│   └── utils/                   # Extensões (moeda, data, helpers)
+├── core/                        # Configurações globais e infraestrutura
+│   ├── config/
+│   ├── di/              
+│   ├── router/
+│   └── ui/              
 │
-├── features/                    # Telas organizadas por domínio
-│   ├── cart/                    # Lógica e UI do Carrinho
-│   ├── menu/                    # Lógica e UI do Menu/Listagem
-│   └── user/                    # Lógica do Usuário/Sessão
+├── features/                    # Recursos/funcionalidades específicas 
+│   ├── cart/                  
+│   ├── main/                    # Responsável pela navegação principal
+│   ├── menu/
+│   ├── onboarding/
+│   ├── orders/
+│   ├── splash/            
+│   └── user/                  
 │
-├── shared/                      # Componentes reutilizáveis que conhecem o negócio
-│   ├── domain/                  # OrderCalculator (Lógica de Desconto Pura)
-│   ├── models/                  # UserModel, OrderModel, ItemModel
-│   └── view_models/             # CartGlobalViewModel, UserGlobalViewModel
+├── shared/                      # Recursos compartilhados/reutilizados em várias features
+│   ├── domain/                
+│   ├── models/               
+│   ├── services/               
+│   ├── utils/                  
+│   └── view_models/            
 │
-└── main.dart                    # Ponto de entrada (Bootstrap)
+└── main.dart                    # Ponto de início do aplicativo
+
+test/                            # Testes automatizados
+└── unit/ 
 ```
 
 ---
 
-## ⚙️ Regras de Negócio e Implementação
+## :man_technologist: Tecnologias e Ferramentas
 
-As regras de negócio foram implementadas nas camadas apropriadas:
+- **Core**
+  - Framework: `Flutter`
+  - Linguagem de programação: `Dart`
 
-### 1. Descontos (Camada Domain)
+- **Ferramentas de Desenvolvimento**
+  - IDE: `Android Studio`
+  - Versionamento: `Git` & `GitHub`
+  - Qualidade de Código (Linter): `flutter_lints`
 
-A lógica reside em `OrderCalculator`, que verifica as categorias dos itens para aplicar as regras:
+- **Arquitetura & Gerenciamento**
+  - Gerenciamento de Estado: `Provider`
+  - Gerenciamento de Injeção de Dependência: `GetIt`
 
-* **20% Combo:** Sanduíche + Batata + Bebida.
-* **15% Combo:** Sanduíche + Bebida.
-* **10% Combo:** Sanduíche + Batata.
+- **Persistência de Dados**
+  - Armazenamento Local: `shared_preferences`
+  - Acesso ao Sistema de Arquivos: `path_provider`
 
-> Observação: os descontos são aplicados uma única vez por pedido, seguindo a priorização acima (
-> 20% > 15% > 10%).
+- **Interface de Usuário (UI/UX)**
+  - Carrossel / Indicadores: `smooth_page_indicator`
+  - Notificações In-App: `top_snackbar_flutter`
+  - Ícones: `cupertino_icons`
 
-### 2. Validação do Carrinho (Regra de Unicidade)
-
-`CartGlobalViewModel` assegura que apenas **um item por categoria** (sanduíche, batata, bebida)
-possa existir no carrinho. Se o usuário tentar adicionar um segundo item da mesma categoria, o
-ViewModel lança uma exceção tratada pela UI para exibir um aviso amigável.
-
-### 3. Persistência de Dados
-
-* Estado do carrinho e lista de pedidos: **em memória (RAM)** durante a sessão.
-* Nome do usuário e status de onboarding: persistidos em disco via `shared_preferences` usando
-  `LocalPreferencesService`.
-
----
-
-## 🧩 Componentes Principais (exemplos)
-
-### OrderCalculator (pseudocódigo)
-
-```dart
-class OrderCalculator {
-  Money calculateTotal(List<Item> items) {
-    // lógica de soma + aplicação de desconto conforme categorias
-  }
-}
-```
-
-### CartGlobalViewModel (pseudocódigo)
-
-```dart
-class CartGlobalViewModel {
-  final List<Item> _items = [];
-
-  void addItem(Item item) {
-    if (_items.any((i) => i.category == item.category)) {
-      throw DuplicateItemException('Já existe um item desta categoria');
-    }
-    _items.add(item);
-  }
-}
-```
+- **Utilitários**
+  - Formatação (Moedas/Datas): `intl`
 
 ---
 
-## 🖥️ Como Construir, Rodar e Testar
+## :computer: Como rodar
 
-### Setup
+### Pré-requisitos
+
+- [x] Dispositivo conectado à internet;
+- [x] Flutter SDK instalado e configurado;
+- [x] Android Studio (ou VS Code) configurado.
+
+### Instalação
+
+1. Siga as [orientações de instalação do Flutter](https://docs.flutter.dev/install);
+2. Clone o repositório para a sua máquina ou realize o download do zip;
+3. No terminal, na raiz do projeto, execute:
 
 ```bash
 flutter pub get
-# (Opcional) gerar ícones
-dart run flutter_launcher_icons
 ```
 
 ### Execução
 
-O app inicializa na rota `/` (Splash Screen) e checa o estado inicial.
+Para rodar o aplicativo, execute:
 
 ```bash
 flutter run
 ```
 
-### Teste Unitário (Bônus)
+### Testes Unitários
 
-O teste cobre todos os cenários de desconto, incluindo arredondamento de centavos:
+Execute o seguinte comando para rodar os testes (cobertura de cenários de desconto):
 
 ```bash
 flutter test test/unit/order_calculator_test.dart
@@ -139,11 +172,134 @@ flutter test test/unit/order_calculator_test.dart
 
 ---
 
-## 🚧 Limitações e Próximos Passos
+## :game_die: Mocks (Dados Simulados) 
+
+Durante o desenvolvimento, foram utilizados arquivos mocks (localizados em assets/mocks) para simular a comunicação com uma API.
+
+<details> <summary><b>Clique para ver o JSON de MENU</b></summary>
+
+```json
+[
+  {
+    "id": 1,
+    "category": "sandwich",
+    "name": "Burger",
+    "description": "A classic, juicy beef burger served on a fresh bun.",
+    "price": 500,
+    "imagePath": "assets/mocks/images/menu/item_1.jpg"
+  },
+  {
+    "id": 2,
+    "category": "sandwich",
+    "name": "Egg",
+    "description": "A hearty sandwich featuring fresh eggs and tasty toppings.",
+    "price": 450,
+    "imagePath": "assets/mocks/images/menu/item_2.jpg"
+  },
+  {
+    "id": 3,
+    "category": "sandwich",
+    "name": "Bacon",
+    "description": "A savory sandwich piled high with crispy bacon and cheese.",
+    "price": 700,
+    "imagePath": "assets/mocks/images/menu/item_3.jpg"
+  },
+  {
+    "id": 4,
+    "category": "fries",
+    "name": "Fries",
+    "description": "Crispy golden french fries, perfect as a side.",
+    "price": 200,
+    "imagePath": "assets/mocks/images/menu/item_4.jpg"
+  },
+  {
+    "id": 5,
+    "category": "drink",
+    "name": "Soft Drink",
+    "description": "A refreshing, ice-cold soft drink to complete your meal.",
+    "price": 250,
+    "imagePath": "assets/mocks/images/menu/item_5.jpg"
+  }
+]
+```
+
+</details>
+
+<details> <summary><b>Clique para ver o JSON de PEDIDOS</b></summary>
+
+```json
+[
+  {
+    "id": 1,
+    "code": "2345",
+    "date": "2025-11-21T23:33:40.123Z",
+    "items": [
+      {
+        "id": 1,
+        "category": "sandwich",
+        "name": "Burger",
+        "description": "A classic, juicy beef burger served on a fresh bun.",
+        "price": 500,
+        "imagePath": "assets/mocks/images/menu/item_1.jpg"
+      }
+    ],
+    "subtotal": 500,
+    "discount": 0,
+    "total": 500,
+    "status": "preparing",
+    "orderedBy": {
+      "name": "Luís"
+    }
+  },
+  {
+    "id": 2,
+    "code": "2346",
+    "date": "2025-11-21T23:33:40.123Z",
+    "items": [
+      {
+        "id": 1,
+        "category": "sandwich",
+        "name": "Burger",
+        "description": "A classic, juicy beef burger served on a fresh bun.",
+        "price": 500,
+        "imagePath": "assets/mocks/images/menu/item_1.jpg"
+      },
+      {
+        "id": 4,
+        "category": "fries",
+        "name": "Fries",
+        "description": "Crispy golden french fries, perfect as a side.",
+        "price": 200,
+        "imagePath": "assets/mocks/images/menu/item_4.jpg"
+      }
+    ],
+    "subtotal": 700,
+    "discount": 70,
+    "total": 630,
+    "status": "delivered",
+    "orderedBy": {
+      "name": "Perna"
+    }
+  }
+]
+```
+
+</details>
+
+---
+
+## :construction: Limitações e Próximos Passos
 
 * **Rotas tipadas:** migrar para um roteador com tipagem (ex: `GoRouter`) para segurança na injeção
   de argumentos.
-* **API real:** trocar `ApiService` simulado por `http.get` ou `Dio.get` para integração com
+* **API real:** trocar `ApiService` simulado por uma `http` para integração com
   backend e ajustas camadas adaptadas durante a simulação.
 * **Testes de Integração:** adicionar testes end-to-end para fluxo do carrinho (adicionar item →
   verificar total → enviar pedido).
+
+---
+
+## :pencil: Autor
+
+| [<img src="https://avatars.githubusercontent.com/u/96630233?s=400&u=3400cfe6ba8fb87692f4f14cbdbef3e5cc996b67&v=4" width=115><br><sub>Luís Henrique Perna</sub>](https://github.com/luishperna) |
+| :---: |
